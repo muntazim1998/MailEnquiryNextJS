@@ -15,8 +15,8 @@ export async function POST(request) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: emailUser,  // Use environment variables
-        pass: emailPassword,  // Use environment variables
+        user: "muntazim1998@gmail.com",  // Use environment variables
+        pass:"dlga tzhl apnt zuon",  // Use environment variables
       },
     });
 
