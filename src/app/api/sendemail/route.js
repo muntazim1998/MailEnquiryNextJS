@@ -4,6 +4,10 @@ import nodemailer from 'nodemailer';
 // Named export for POST request
 export async function POST(request) {
   try {
+    const functions = require('firebase-functions');
+
+    const emailUser = functions.config().email.user;
+    const emailPassword = functions.config().email.password;
     // Parse the incoming JSON data
     const { firstname, lastname, phone, email, message } = await request.json();
 
@@ -11,14 +15,14 @@ export async function POST(request) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,  // Use environment variables
-        pass: process.env.EMAIL_PASS,  // Use environment variables
+        user: emailUser,  // Use environment variables
+        pass: emailPassword,  // Use environment variables
       },
     });
 
     // Email options
     const mailOptions = {
-      from: process.env.EMAIL_USER,   // Sender email address
+      from: emailUser,   // Sender email address
       to: 'muntazimalikhan@gmail.com', // Recipient email address
       subject: 'Enquiry Submission',
       text: `Name: ${firstname} ${lastname}\nPhone: ${phone}\nEmail: ${email}\nQuery Message: ${message}`,
